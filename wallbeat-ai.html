@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WallBeat AI</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Montserrat', sans-serif; background: #1f1f1f; color: white; padding: 1.5rem; }
+h2 { font-size: 1.3rem; font-weight: 700; margin-bottom: 0.3rem; }
+.artist { color: #b2b2b2; font-size: 0.9rem; margin-bottom: 1.2rem; }
+.back-btn { background: white; color: black; border: none; padding: 0.5rem 1.2rem; border-radius: 25px; font-weight: 700; font-size: 0.85rem; cursor: pointer; margin-bottom: 1.2rem; display: inline-block; }
+.back-btn:hover { background: #ddd; }
+.card { background: #2d2d2d; border-radius: 12px; padding: 1.5rem; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; }
+.stock-name { font-size: 1.3rem; font-weight: 700; }
+.stock-symbol { color: #b2b2b2; font-size: 0.85rem; margin-top: 3px; }
+.stock-price { font-size: 1.3rem; font-weight: 700; text-align: right; }
+.stock-change { font-size: 0.85rem; font-weight: 600; text-align: right; margin-top: 3px; }
+.up { color: #23d05a; }
+.down { color: #e05c5c; }
+.story-section { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid #444; }
+.story-section h3 { font-size: 0.95rem; color: #b2b2b2; margin-bottom: 0.8rem; }
+.story-section p { font-size: 0.9rem; line-height: 1.8; color: #e0e0e0; }
+.loading { text-align: center; padding: 3rem 1rem; color: #b2b2b2; }
+.loader { width: 36px; height: 36px; border: 3px solid #333; border-top: 3px solid #c253dc; border-radius: 50%; animation: spin 1s linear infinite; margin: 1rem auto; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.error { color: #e05c5c; text-align: center; padding: 2rem; }
+</style>
+</head>
+<body>
+
+<button class="back-btn" onclick="window.parent.postMessage('goBack', '*')">&#8592; Back</button>
+
+<div id="app">
+  <div class="loading">
+    <p>Finding your stock match...</p>
+    <div class="loader"></div>
+  </div>
+</div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const songName = params.get("song") || "Manchild";
+const artistName = params.get("artist") || "Sabrina Carpenter";
+
+document.querySelector(".loading p").textContent = `Matching "${songName}" to a stock...`;
+
+async function fetchStockStory() {
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{
+          role: "user",
+          content: `You are WallBeat AI — a finance meets music analyst.
+
+The user is listening to "${songName}" by ${artistName}.
+
+Your job:
+1. Pick ONE real stock whose story resonates with this song's vibe or theme
+2. Write a compelling 3-4 sentence story connecting the song to the stock
+3. Give realistic weekly price data (7 days) for the chart
+
+Respond ONLY in this exact JSON format, nothing else, no markdown:
+{
+  "stock": "Company Name",
+  "symbol": "TICKER",
+  "currentPrice": "000.00",
+  "change": "+0.00%",
+  "isUp": true,
+  "story": "Your 3-4 sentence story here...",
+  "weeklyPrices": [150, 155, 148, 160, 158, 165, 170]
+}`
+        }]
+      })
+    });
+
+    const data = await response.json();
+    let rawText = data.content[0].text.trim();
+    rawText = rawText.replace(/```json|```/g, "").trim();
+    const result = JSON.parse(rawText);
+    renderStory(result);
+
+  } catch (err) {
+    document.getElementById("app").innerHTML = `
+      <div class="error">
+        <p>Something went wrong. Please try again.</p>
+        <p style="font-size:0.8rem; margin-top:0.5rem; color:#888">${err.message}</p>
+      </div>`;
+  }
+}
+
+function renderStory(result) {
+  document.getElementById("app").innerHTML = `
+    <h2>${songName}</h2>
+    <p class="artist">by ${artistName}</p>
+    <div class="card">
+      <div class="card-header">
+        <div>
+          <div class="stock-name">${result.stock}</div>
+          <div class="stock-symbol">${result.symbol}</div>
+        </div>
+        <div>
+          <div class="stock-price">$${result.currentPrice}</div>
+          <div class="stock-change ${result.isUp ? 'up' : 'down'}">
+            ${result.isUp ? '▲' : '▼'} ${result.change}
+          </div>
+        </div>
+      </div>
+      <canvas id="chart" height="120"></canvas>
+      <div class="story-section">
+        <h3>Why this stock matches this song:</h3>
+        <p>${result.story}</p>
+      </div>
+    </div>`;
+
+  drawChart(result.weeklyPrices, result.isUp);
+}
+
+function drawChart(prices, isUp) {
+  const ctx = document.getElementById("chart").getContext("2d");
+  const color = isUp ? "#23d05a" : "#e05c5c";
+  new Chart(ctx, {
+    type: "line",
+    data: {
+      labels: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      datasets: [{
+        data: prices,
+        borderColor: color,
+        backgroundColor: color + "22",
+        borderWidth: 2,
+        pointBackgroundColor: color,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: false } },
+      scales: {
+        x: { ticks: { color: "#b2b2b2" }, grid: { color: "#333" } },
+        y: { ticks: { color: "#b2b2b2" }, grid: { color: "#333" } }
+      }
+    }
+  });
+}
+
+fetchStockStory();
+</script>
+</body>
+</html>

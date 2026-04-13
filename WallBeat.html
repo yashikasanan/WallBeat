@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WallBeat</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://fonts.googleapis.com/css2?family=Bitcount+Ink:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+    <link rel="stylesheet" href="WallBeat.css">
+
+</head>
+<body>
+    
+    <nav>
+        <div class="left-half">
+            <div class="logo">
+                <span class="wallbeat-logo">Wall<span class="beat">Beat</span></span>
+            </div>
+            <div class="home"><i class="fa-solid fa-house"></i></div>
+            <div class="search-bar">
+                <div class="search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+                <input type="text" class="input-box" placeholder="What do you want to play?">
+                <div class="browser"><i class="fa-solid fa-folder-closed"></i></div>
+            </div>
+        </div>
+        
+        <div class="right-half">
+            <div class="right-half-p1">
+                <p class="nav-text">Premium</p>
+                <p class="nav-text">Support</p>
+                <p class="nav-text">Download</p>
+            </div>
+            <div class="right-half-p2">
+                <div class="nav-text"><i class="fa-solid fa-arrow-down"></i>Install App </div>
+                <div class="nav-text">Sign up</div>
+                <button class="login-btn"> Log in</button>
+            </div>
+        </div>
+    </nav>
+
+    <div id="stock-bar">
+            <div id="ticker-bar">Loading stocks...</div>
+            <div id="mood-display"></div>
+    </div>
+
+    <div class="main">
+        <div class="main-left-part">
+            <div class="library">
+                <p>Your Library</p>
+                <div>+</div>
+            </div>
+
+            <div class="box-container">
+                <div class="box">
+                    <h4>Create your first playlist</h4>
+                    <p>It's easy, we'll help you</p>
+                    <button>Create playlist</button>
+                </div>
+                <div class="box">
+                    <h4>Let's find some podcasts to follow</h4>
+                    <p>We'll keep you updated on new updates</p>
+                    <button>Browse podcasts</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="main-right-part">
+            <div class="music-section">
+                <h2>Popular Songs</h2>
+                <div class="songs">
+                    <div class="music-card">
+                        <img src="images_spot/1_spot.jpg" alt="Shri Krishna Govind Hare Murari by Jubin Natyal">
+                        <div class="music-play-btn"><i id="1" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Shri Krishna</div>
+                        <div class="img-description">Hare Krishna Hare Krishna Krishna Krishna Hare Hare.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/2_spot.jpg" alt="Clara Bow by Taylor Swift">
+                        <div class="music-play-btn"><i id="2" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Clara Bow</div>
+                        <div class="img-description">I'd see the lights of Manhattan.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/3_spot.jpg" alt="Winning Speech by Karan Aujla">
+                        <div class="music-play-btn"><i id="3" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Winning Speech</div>
+                        <div class="img-description">I can stop, But my mind doesn't stop.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/4_stop.png" alt="Ordinary by Alex Warren">
+                        <div class="music-play-btn"><i id="4" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Ordinary</div>
+                        <div class="img-description">You're taking' me out of the ordinary.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/6_spot.jpg" alt="Main Shiv Ka Shiv Mere by Hansraj Raghuwanshi">
+                        <div class="music-play-btn"><i id="5" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Om Namah Shivay</div>
+                        <div class="img-description">Main Shiv ka hu Shiv mere hai.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/7_spot.jpg" alt="Golden by Ejae" >
+                        <div class="music-play-btn"><i id="6" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Golden</div>
+                        <div class="img-description">We're goin' up, up, up,it's our moment.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa5.webp" alt="Don by Diljit Dosanjh" >
+                        <div class="music-play-btn"><i id="7" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Don</div>
+                        <div class="img-description">I roam in the sky, people try to measure me on earth.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa9.jpg" alt="Hanuman Chalisa" >
+                        <div class="music-play-btn"><i id="8" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Hanuman Chalisa</div>
+                        <div class="img-description">Jai Shree Ram.....</div>
+                    </div>
+                </div>
+
+
+                <!-- best of artists -->
+                <h2>Best of artists</h2>
+                <div class="songs">
+                    <div class="music-card">
+                        <img src="images_spot/boa_1.webp" alt="">
+                        <div class="music-play-btn"><i id="9" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Taylor Swift</div>
+                        <div class="img-description">#5 in the world <i>102 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/5_spot.jpg" alt="">
+                        <div class="music-play-btn"><i id="10" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Sabrina Carpenter</div>
+                        <div class="img-description">#27 in the world <i>30 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa_2.jpg" alt="">
+                        <div class="music-play-btn"><i id="11" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Weeknd</div>
+                        <div class="img-description">#2 in the world <i>115 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa3.webp" alt="">
+                        <div class="music-play-btn"><i id="12" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Olivia Dean</div>
+                        <div class="img-description">#33 in the world <i>62 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa4.avif" alt="">
+                        <div class="music-play-btn"><i id="13" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Miley Cyrus</div>
+                        <div class="img-description">#48 in the world <i>53 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa7.png" alt="" >
+                        <div class="music-play-btn"><i id="14" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Shawn Mendes</div>
+                        <div class="img-description">#92 in the world <i>43 Million Followers.....</i></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa8.webp" alt="" >
+                        <div class="music-play-btn"><i id="15" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Lana Del Rey</div>
+                        <div class="img-description">#28 in the world <i>64 Million Followers</i>.....</div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/boa10.jpg" alt="" >
+                        <div class="music-play-btn"><i id="16" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Dua Lipa</div>
+                        <div class="img-description">#26 in the world <i>64 Million Followers</i>.....</div>
+                    </div>
+
+                </div>
+                
+
+                <h2>Albums featuring songs you like</h2>
+                <div class="songs">
+                    <div class="music-card">
+                        <img src="images_spot/alb1.png" alt="">
+                        <div class="music-play-btn"><i id="17" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">1989</div>
+                        <div class="img-description">October 27, 2014 <p><i>22 songs, 1 hr 21 min</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb2.png" alt="">
+                        <div class="music-play-btn"><i id="18" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Midnights</div>
+                        <div class="img-description">October 21, 2022 <p><i>23 songs, 1 hr 20 min</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb3.jpg" alt="">
+                        <div class="music-play-btn"><i id="19" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Evolve</div>
+                        <div class="img-description">February 10, 2015 <p><i>12 songs, 43 min 7 sec</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb4.jpg" alt="">
+                        <div class="music-play-btn"><i id="20" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">The Life of a Showgirl</div>
+                        <div class="img-description">October 3, 2025  <p><i>12 songs, 41 min 45 sec</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb5.png" alt="">
+                        <div class="music-play-btn"><i id="21" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Reputation</div>
+                        <div class="img-description">November 10, 2017 <p><i>16 songs, 55 min 45 sec</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb6.jpg" alt="" >
+                        <div class="music-play-btn"><i id="22" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">The Tortured Poets Department</div>
+                        <div class="img-description">April 19, 2024 <p><i>31 songs, 2 hr 2 min</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb7.jpg" alt="" >
+                        <div class="music-play-btn"><i id="23" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">P-POP Culture</div>
+                        <div class="img-description">August 22, 2025 <p><i>11 songs, 34 min 26 sec</i></p></div>
+                    </div>
+
+                    <div class="music-card">
+                        <img src="images_spot/alb8.jpg" alt="" >
+                        <div class="music-play-btn"><i id="24" class="playMusic fa-solid fa-circle-play"></i></div>
+                        <div class="img-title">Lover</div>
+                        <div class="img-description">August 23, 2019 <p><i>18 songs, 1 hr 1 min</i></p></div>
+                    </div>
+
+                </div>
+            
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- player -->
+    <div class="lower-part">
+        <div class="player-bar">
+        <div class="now-bar">
+        <img src="images_spot/1_spot.jpg" alt="">
+        <div class="img-info">
+            <div class="img-title-info">Hare Krishna Hare Rama</div>
+            <div class="img-des-info">Jubin Natyal</div>
+        </div>
+        
+    </div>
+
+    <div class="music-controller">
+        <div class="player">
+            <div><i id="shuffle" class="player-btns fa-solid fa-shuffle"></i></div>
+            <div><i id="backward" class="player-btns fa-solid fa-backward-step"></i></div>
+            <div><i id="play" class="player-btns fa-solid fa-circle-play"></i></div>
+            <div><i id="forward" class="player-btns fa-solid fa-forward-step"></i></div>
+            <div><i id="repeat" class="player-btns fa-solid fa-repeat"></i></div>
+        </div>
+        <div>
+            <input type="range" id="progressBar" value="0">
+        </div>
+    </div>
+
+    <div></div>
+    </div>
+    </div>
+
+    <script src="WallBeat.js"></script>
+    
+    
+
+</body>
+</html>
