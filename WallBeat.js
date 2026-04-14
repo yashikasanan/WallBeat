@@ -909,23 +909,23 @@ async function fetchAllStocks() {
     const tickerBar = document.getElementById("ticker-bar");
     tickerBar.innerHTML = "Loading stocks...";
 
-    // const results = [];
-    // for (const company of companies) {
-    //         const stock = await fetchStockPrice(company.symbol);
-    //         results.push({  ...stock, name: company.name});
+    const results = [];
+    for (const company of companies) {
+            const stock = await fetchStockPrice(company.symbol);
+            results.push({  ...stock, name: company.name});
 
-    //         await new Promise(resolve => setTimeout(resolve, 1200));
-    // }
+            await new Promise(resolve => setTimeout(resolve, 1200));
+    }
 
     // mock data
-    const results = [
-        { symbol: "JPM", name: "JPMorgan", price: "198.50", change: "1.2", isUp: true },
-        { symbol: "AAPL", name: "Apple", price: "175.30", change: "0.8", isUp: true },
-        { symbol: "TSLA", name: "Tesla", price: "242.10", change: "-2.1", isUp: false },
-        { symbol: "GOOGL", name: "Google", price: "165.40", change: "1.5", isUp: true },
-        { symbol: "AMZN", name: "Amazon", price: "178.90", change: "-0.4", isUp: false },
-        { symbol: "MSFT", name: "Microsoft", price: "415.20", change: "0.9", isUp: true },
-    ];
+    // const results = [
+    //     { symbol: "JPM", name: "JPMorgan", price: "198.50", change: "1.2", isUp: true },
+    //     { symbol: "AAPL", name: "Apple", price: "175.30", change: "0.8", isUp: true },
+    //     { symbol: "TSLA", name: "Tesla", price: "242.10", change: "-2.1", isUp: false },
+    //     { symbol: "GOOGL", name: "Google", price: "165.40", change: "1.5", isUp: true },
+    //     { symbol: "AMZN", name: "Amazon", price: "178.90", change: "-0.4", isUp: false },
+    //     { symbol: "MSFT", name: "Microsoft", price: "415.20", change: "0.9", isUp: true },
+    // ];
 
     displayTicker(results);
     decideMood(results);
